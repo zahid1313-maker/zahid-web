@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zahid Akhtar | Learn HTML, CSS, Java, Photoshop & Excel</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1199cf;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .settings-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .settings-panel {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    .settings-panel.active {
+      display: block;
+    }
+
+    .settings-panel h3 {
+      margin-bottom: 1rem;
+      color: #0b3d91;
+    }
+
+    .settings-panel label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .settings-panel input[type="file"],
+    .settings-panel input[type="text"],
+    .settings-panel input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .settings-panel button {
+      padding: 0.5rem 1rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .settings-options {
+      margin-top: 1rem;
+    }
+
+    .settings-options button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .back-btn {
+      background: #555;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #0b3d91;
+    }
+
+    .course {
+      background: #fff;
+      padding: 1rem;
+      border-left: 5px solid #0b3d91;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .details {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f0f8ff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .details img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .course button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button[type="submit"] {
+      padding: 0.7rem 1.5rem;
+      background: #0b3d91;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 4px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #222;
+      color: #fff;
+      margin-top: 2rem;
+    }
+
+    #success-message {
+      margin-top: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="settings-btn" onclick="toggleSettings()">Settings</button>
+    <img id="profilePic" src="c:\Users\CHS-13\Documents\zahid image\unnamed.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+    <h1>Zahid Akhtar</h1>
+    <p>Learn HTML, CSS, Java, Photoshop & Excel Mastery</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#courses">Courses</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="settings-panel" id="settingsPanel">
+    <h3>Settings</h3>
+    <div>
+      <label for="profilePicture">Change Profile Picture</label>
+      <input type="file" id="profilePicture" accept="image/*">
+      <button onclick="updateProfilePicture()">Update Picture</button>
+    </div>
+    <div>
+      <h4>Create Your Account</h4>
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter username" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <button onclick="createAccount()">Create Account</button>
+    </div>
+    <div class="settings-options">
+      <h4>Other Options</h4>
+      <button onclick="toggleTheme()">Toggle Theme</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+    <button class="back-btn" onclick="toggleSettings()">Back</button>
+  </div>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I’m <strong>Zahid Akhtar</strong>, a tech educator and mentor. I specialize in teaching useful skills for the digital age — including web development, programming, graphic design, and office productivity.</p>
+  </section>
+
+  <section id="courses">
+    <h2>Select Your Field</h2>
+
+    <!-- HTML Course -->
+    <div class="course">
+      <h3>HTML</h3>
+      <p>Build the structure of websites using HTML tags, forms, tables, and semantic layouts.</p>
+      <button onclick="toggleDetails('htmlDetails')">Click here </button>
+      <div class="details" id="htmlDetails">
+        <img src="c:\Users\CHS-13\Documents\zahid image\IMG_20250607_111152_0202.jpg" alt="HTML Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
+        <p style="font-size: 20px; shape-margin: 50px;">Follow this link to learn in detail </p>
+        <a href="https://www.w3schools.com/" target="_blank">w3schools</a>
+      </div>
+    </div>
+
+    <!-- CSS Course -->
+    <div class="course">
+      <h3>CSS</h3>
+      <p>Follow this link to style your web such as background color, font size, font color and so on</p>
+      <button onclick="toggleDetails('cssDetails')" style="font-weight: 100;">click here </button>
+      <div class="details" id="cssDetails">
+        <img src="c:\Users\CHS-13\Documents\zahid image\1714546382493.jpg" alt="CSS Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
+        <p>Click on this link you will get detail about this page.</p>
+        <a href="https://www.w3schools.com/css/default.asp" target="_blank">Learn more about CSS</a>
+      </div>
+    </div>
+
+    <!-- Java Course -->
+    <div class="course">
+      <h3>Java</h3>
+      <p>Understand programming with Java: variables, loops, OOP, and building apps.</p>
+      <button onclick="toggleDetails('javaDetails')">Click me </button>
+      <div class="details" id="javaDetails">
+        <img src="c:\Users\CHS-13\Documents\zahid image\1683091212575.jpg" alt="Java Course Image" style="width: 130px; height: 130px; border-radius: 50%;">
+        <p>Explore Java fundamentals: classes, methods, loops, arrays, and app development.</p>
+        <a href="https://www.w3schools.com/js/default.asp" target="_blank">Hii java !</a>
+      </div>
+    </div>
+
+    <!-- Photoshop Course -->
+    <div class="course">
+      <h3>Photoshop</h3>
+      <p>Edit images, design banners, logos, and visual content with Adobe Photoshop tools and layers.</p>
+      <button onclick="toggleDetails('psDetails')">Click me </button>
+      <div class="details" id="psDetails">
+        <img src="c:\Users\CHS-13\Documents\zahid image\IMG_20250607_111152_0202.jpg" alt="Photoshop Course Image" style="width: auto; height: auto; border-radius: 50%;">
+        <p>Learn to use layers, masks, tools, and effects to enhance and create visuals.</p>
+        <a href="https://www.adobe.com/in/products/photoshop.html" target="_blank">Hii photoshop</a>
+      </div>
+    </div>
+
+    <!-- Excel Mastery -->
+    <div class="course">
+      <h3>Excel Mastery</h3>
+      <p>Become an Excel expert — learn formulas, pivot tables, charts, and automation.</p>
+      <button onclick="toggleDetails('excelDetails')">Click me !</button>
+      <div class="details" id="excelDetails">
+        <img src="c:\Users\CHS-13\Documents\zahid image\unnamed.jpg" alt="Excel Course Image" style="width: auto; height: auto; border-radius: 50%;">
+        <p>Analyze data, build dashboards, automate with macros, and master formulas.</p>
+        <a href="https://excel.cloud.microsoft/" target="_blank">Hii Excel</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" id="name" name="from_name" placeholder="YOUR_NAME" required />
+      <input type="email" id="email" name="from_email" placeholder="YOUR_EMAIL" required />
+      <textarea id="message" name="message" placeholder="YOUR_MESSAGE" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="success-message"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 Zahid Akhtar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleSettings() {
+      const settingsPanel = document.getElementById('settingsPanel');
+      settingsPanel.classList.toggle('active');
+    }
+
+    function updateProfilePicture() {
+      const input = document.getElementById('profilePicture');
+      const profilePic = document.getElementById('profilePic');
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profilePic.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please select an image file.');
+      }
+    }
+
+    function createAccount() {
+      const username = document.getElementById('username').value;
+      const
+
+ password = document.getElementById('password').value;
+      if (username && password) {
+        alert('Account creation submitted for: ' + username);
+        // Note: Actual account creation requires backend integration
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+      } else {
+        alert('Please fill in both username and password.');
+      }
+    }
+
+    function toggleTheme() {
+      document.body.style.background = document.body.style.background === '#f7f7f7' ? '#333' : '#f7f7f7';
+      document.body.style.color = document.body.style.color === '#333' ? '#fff' : '#333';
+    }
+
+    function logout() {
+      alert('Logged out successfully.');
+      // Note: Actual logout requires backend session handling
+    }
+
+    function toggleDetails(id) {
+      const details = document.getElementById(id);
+      details.style.display = details.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.sendForm("service_lt224p3", "template_f3c9q2o", this)
+        .then(function(response) {
+          const userEmail = document.querySelector("input[name='from_email']").value;
+          document.getElementById("success-message").textContent = "✅ Message sent! We will reply to: " + userEmail;
+          document.getElementById("contactForm").reset();
+        }, function(error) {
+          document.getElementById("success-message").textContent = "❌ Error sending message. Please try again.";
+        });
+    });
+  </script>
+</body>
+</html>
